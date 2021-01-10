@@ -25,8 +25,7 @@ familiar with composer)
 1.) Use your autoloader (if not already done via Composer autoloader)
 
 2.) Connect the "kw_rules" into your app. When it came necessary
-you can extends every library to comply your use-case; mainly your captcha init
-and set checks itself.
+you can extends every library to comply your use-case; mainly set checks itself.
 
 # Python Installation
 
@@ -41,5 +40,4 @@ into your "setup.py":
 # Python Usage
 
 1.) Connect the "kw_rules.rules" into your app. When it came necessary
-you can extends every library to comply your use-case; mainly your captcha init
-and set checks itself.
+you can extends every library to comply your use-case; mainly set checks itself.

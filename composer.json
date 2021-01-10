@@ -2,8 +2,9 @@
   "name": "alex-kalanis/kw_rules",
   "description": "Entry rules for KWCMS",
   "keywords": [
-    "rules",
     "checks",
+    "checking",
+    "rules",
     "ruleset"
   ],
   "license": "BSD-3-Clause",

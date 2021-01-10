@@ -11,7 +11,7 @@ setup(
     license='BSD',
     author='Petr Plsek',
     author_email='me@kalanys.com',
-    description='HTML Forms for KWCMS',
+    description='Entry rules for KWCMS',
     long_description=long_desc,
     long_description_content_type='text/markdown',
     url='https://github.com/alex-kalanis/kw_rules',
