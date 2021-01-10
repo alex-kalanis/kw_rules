@@ -1,0 +1,35 @@
+{
+  "name": "alex-kalanis/kw_rules",
+  "description": "Entry rules for KWCMS",
+  "keywords": [
+    "rules",
+    "checks",
+    "ruleset"
+  ],
+  "license": "BSD-3-Clause",
+  "type": "library",
+  "require": {
+    "ext-fileinfo": "*",
+    "ext-gd": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-hash": "*",
+    "php": ">=7.2.0"
+  },
+  "suggest": {
+    "ddeboer/vatin": "PHP package for checking EU VAT from",
+    "giggsey/libphonenumber-for-php": "PHP package for checking phone numbers"
+  },
+  "require-dev": {
+    "phpunit/phpunit": ">=7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "kalanis\\kw_rules\\": "php-src/"
+    }
+  },
+  "scripts": {
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
