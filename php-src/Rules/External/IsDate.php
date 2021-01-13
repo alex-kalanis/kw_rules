@@ -24,6 +24,6 @@ class IsDate extends ARule
         if($dtInfo['warning_count'] == 0 && $dtInfo['error_count'] == 0 ){
             return;
         }
-        throw new RuleException($this->errorText, $entry->getKey());
+        throw new RuleException($this->errorText);
     }
 }

@@ -31,7 +31,7 @@ class MatchAll extends ARule
         }
         if (!empty($last)) {
             // it will die when something has been found
-            throw new RuleException($this->errorText, $entry->getKey(), $last);
+            throw new RuleException($this->errorText, 0, $last);
         }
     }
 }

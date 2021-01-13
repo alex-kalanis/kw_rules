@@ -17,7 +17,7 @@ class MatchesPattern extends ARule
     public function validate(IValidate $entry): void
     {
         if (!boolval(preg_match($this->againstValue, $entry->getValue()))) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

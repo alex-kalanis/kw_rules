@@ -25,6 +25,6 @@ class FileMimeEquals extends AFileRule
         if (!empty($filename) && $finfo && ($finfo->file($filename) == $this->againstValue)) {
             return;
         }
-        throw new RuleException($this->errorText, $entry->getKey());
+        throw new RuleException($this->errorText);
     }
 }

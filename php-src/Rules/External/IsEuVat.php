@@ -23,7 +23,7 @@ class IsEuVat extends ARule
     {
         $validator = new Validator();
         if (!$validator->isValid($entry->getValue(), true)) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

@@ -35,14 +35,14 @@ class IsPostCode extends ARule
     public function validate(IValidate $entry): void
     {
         if (!isset(static::$codes[$this->againstValue])) {
-            throw new RuleException(sprintf('Unknown preset ISO key for country %s', $this->againstValue), $entry->getKey());
+            throw new RuleException(sprintf('Unknown preset ISO key for country %s', $this->againstValue) );
         }
         $rule = static::$codes[$this->againstValue];
         if (empty($rule['Regex']) && empty($entry->getValue())) {
             return;
         }
         if (!boolval(preg_match($rule['Regex'], $entry->getValue()))) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

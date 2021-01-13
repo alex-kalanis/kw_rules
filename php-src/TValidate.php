@@ -22,7 +22,7 @@ trait TValidate
         $this->errors = [];
         foreach ($entry->getRules() as $rule) {
             try {
-                $rule->validate($entry);
+                $rule->validate($entry); // for files need a whole object, so pack it all
             } catch (RuleException $ex) {
                 if (empty($this->errors[$entry->getKey()])) {
                     $this->errors[$entry->getKey()] = [];

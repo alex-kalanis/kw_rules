@@ -17,7 +17,7 @@ class FileSent extends AFileRule
     public function validate(IValidateFile $entry): void
     {
         if (UPLOAD_ERR_NO_FILE === $entry->getError()) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

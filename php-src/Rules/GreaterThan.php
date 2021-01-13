@@ -19,7 +19,7 @@ class GreaterThan extends ARule
     public function validate(IValidate $entry): void
     {
         if (intval($entry->getValue()) <= $this->againstValue) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

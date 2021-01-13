@@ -30,6 +30,6 @@ class MatchAny extends ARule
                 $last = $ex;
             }
         }
-        throw new RuleException($this->errorText, $entry->getKey(), $last);
+        throw new RuleException($this->errorText, 0, $last);
     }
 }

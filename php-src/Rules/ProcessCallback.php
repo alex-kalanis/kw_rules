@@ -30,7 +30,7 @@ class ProcessCallback extends ARule
     public function validate(IValidate $entry): void
     {
         if (!call_user_func($this->againstValue, $entry->getValue())) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

@@ -18,7 +18,7 @@ class HashedFuncEquals extends ARule
     public function validate(IValidate $entry): void
     {
         if (!hash_equals( strval($this->againstValue), strval($entry->getValue()) )) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

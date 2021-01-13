@@ -31,6 +31,6 @@ class ImageSizeList extends AFileRule
             }
         }
 
-        throw new RuleException($this->errorText, $entry->getKey());
+        throw new RuleException($this->errorText);
     }
 }

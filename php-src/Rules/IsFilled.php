@@ -17,7 +17,7 @@ class IsFilled extends ARule
     public function validate(IValidate $entry): void
     {
         if (empty($entry->getValue())) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

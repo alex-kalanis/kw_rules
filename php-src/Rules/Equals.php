@@ -17,7 +17,7 @@ class Equals extends ARule
     public function validate(IValidate $entry): void
     {
         if ($entry->getValue() != $this->againstValue) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

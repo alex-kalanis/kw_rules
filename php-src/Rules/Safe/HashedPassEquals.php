@@ -19,7 +19,7 @@ class HashedPassEquals extends ARule
     public function validate(IValidate $entry): void
     {
         if (!password_verify( strval($entry->getValue()), strval($this->againstValue) )) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

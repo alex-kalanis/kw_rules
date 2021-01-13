@@ -22,6 +22,6 @@ class InRangeEquals extends ARule
         if ($varToCheck >= $this->againstValue[0] && $varToCheck <= $this->againstValue[1]) {
             return;
         }
-        throw new RuleException($this->errorText, $entry->getKey());
+        throw new RuleException($this->errorText);
     }
 }

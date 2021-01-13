@@ -17,11 +17,11 @@ class IsJsonString extends ARule
     public function validate(IValidate $entry): void
     {
         if (!(is_string($entry->getValue()) || is_numeric($entry->getValue()))) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
         json_decode($entry->getValue());
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText, 0, new RuleException(json_last_error_msg()));
         }
     }
 }

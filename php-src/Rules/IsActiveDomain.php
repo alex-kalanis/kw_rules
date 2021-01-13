@@ -20,6 +20,6 @@ class IsActiveDomain extends ARule
         if (filter_var(gethostbyname($entry->getValue()), FILTER_VALIDATE_IP)) {
             return;
         }
-        throw new RuleException($this->errorText, $entry->getKey());
+        throw new RuleException($this->errorText);
     }
 }

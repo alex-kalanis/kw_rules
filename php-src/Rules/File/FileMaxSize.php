@@ -22,7 +22,7 @@ class FileMaxSize extends AFileRule
     public function validate(IValidateFile $entry): void
     {
         if ($entry->getSize() > $this->againstValue) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 

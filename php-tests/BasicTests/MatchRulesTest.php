@@ -50,10 +50,8 @@ class MatchRulesTest extends CommonTestClass
         } catch (RuleException $ex) {
             // no catch - no errors - be risky and that's okay here
             $got = $ex->getPrev();
-            $this->assertNotEmpty($ex->getKey());
             $this->assertNotEmpty($got);
             $this->assertInstanceOf('\kalanis\kw_rules\Exceptions\RuleException', $got);
-            $this->assertNotEmpty($got->getKey());
         }
     }
 

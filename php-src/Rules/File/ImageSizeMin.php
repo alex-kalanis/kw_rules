@@ -33,7 +33,7 @@ class ImageSizeMin extends AFileRule
             }
         }
 
-        throw new RuleException($this->errorText, $entry->getKey());
+        throw new RuleException($this->errorText);
     }
 
     protected function checkValue($againstValue)

@@ -17,7 +17,7 @@ class IsNumeric extends ARule
     public function validate(IValidate $entry): void
     {
         if (!is_numeric($entry->getValue())) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }

@@ -30,9 +30,9 @@ class IsTelephone extends ARule
             if ($phoneUtil->isValidNumber($number)) {
                 return;
             }
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText );
         } catch (NumberParseException $e) {
-            throw new RuleException($this->errorText, $entry->getKey(), $e);
+            throw new RuleException($this->errorText, 0, $e);
         }
     }
 }

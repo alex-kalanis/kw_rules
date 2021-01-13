@@ -20,7 +20,7 @@ class OutRange extends ARule
     {
         $varToCheck = intval($entry->getValue());
         if ($varToCheck > $this->againstValue[0] && $varToCheck < $this->againstValue[1]) {
-            throw new RuleException($this->errorText, $entry->getKey());
+            throw new RuleException($this->errorText);
         }
     }
 }
