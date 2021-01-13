@@ -53,5 +53,4 @@ class PatternRulesTest extends CommonTestClass
             ['foo.bar.baz.example', false, false],
         ];
     }
-
 }
