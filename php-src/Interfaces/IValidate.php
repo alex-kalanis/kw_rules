@@ -3,6 +3,9 @@
 namespace kalanis\kw_rules\Interfaces;
 
 
+use kalanis\kw_rules\Rules;
+
+
 /**
  * Interface IValidate
  * @package kalanis\kw_rules\Interfaces
@@ -21,4 +24,10 @@ interface IValidate
      * @return string|string[]
      */
     public function getValue();
+
+    /**
+     * What rules will be validated
+     * @return Rules\ARule[]|Rules\File\AFileRule[]
+     */
+    public function getRules(): array;
 }

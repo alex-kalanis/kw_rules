@@ -2,7 +2,7 @@ kw_rules
 ================
 
 Contains simplification of rules from the whole bunch of setting. Allow you
-use either get and cli or server and env params as same source.
+create a variety of checks across your app.
 
 This is the mixed package - contains sever-side implementation in Python and PHP.
 
@@ -11,7 +11,7 @@ This is the mixed package - contains sever-side implementation in Python and PHP
 ```
 {
     "require": {
-        "alex-kalanis/kw_rules": "1.0"
+        "alex-kalanis/kw_rules": "2.0"
     }
 }
 ```
@@ -24,7 +24,7 @@ familiar with composer)
 
 1.) Use your autoloader (if not already done via Composer autoloader)
 
-2.) Connect the "kw_rules" into your app. When it came necessary
+2.) Connect the "kw_rules" classes into your app. When it came necessary
 you can extends every library to comply your use-case; mainly set checks itself.
 
 # Python Installation

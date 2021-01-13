@@ -1,8 +1,8 @@
 <?php
 
-use kalanis\kw_rules\Interfaces\IRules;
-use kalanis\kw_rules\Interfaces\IValidate;
-use kalanis\kw_rules\Interfaces\IValidateFile;
+use kalanis\kw_rules\Rules;
+use kalanis\kw_rules\TRules;
+use kalanis\kw_rules\Interfaces;
 use PHPUnit\Framework\TestCase;
 
 
@@ -38,10 +38,17 @@ class CommonTestClass extends TestCase
 }
 
 
-class MockEntry implements IValidate
+class MockEntry implements Interfaces\IValidate
 {
+    use TRules;
+
     protected $mockKey = '';
     protected $mockValue = '';
+
+    protected function whichFactory(): Interfaces\IRuleFactory
+    {
+        return new Rules\Factory();
+    }
 
     public static function init(string $key, $value): self
     {
@@ -68,14 +75,21 @@ class MockEntry implements IValidate
 }
 
 
-class MockFile implements IValidateFile
+class MockFile implements Interfaces\IValidateFile
 {
+    use TRules;
+
     protected $mockKey = '';
     protected $mockValue = '';
     protected $mockMime = '';
     protected $mockName = '';
     protected $mockSize = 0;
     protected $mockError = 0;
+
+    protected function whichFactory(): Interfaces\IRuleFactory
+    {
+        return new Rules\File\Factory();
+    }
 
     public static function init(string $key, string $value, string $mime, string $name, int $size, int $error): self
     {

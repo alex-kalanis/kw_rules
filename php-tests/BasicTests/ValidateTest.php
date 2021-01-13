@@ -1,9 +1,9 @@
 <?php
 
-use kalanis\kw_rules\Rules;
 use kalanis\kw_rules\Exceptions\RuleException;
 use kalanis\kw_rules\Interfaces;
-use kalanis\kw_rules\TValidate;
+use kalanis\kw_rules\Validate;
+use kalanis\kw_rules\SubRules;
 
 
 class ValidateTest extends CommonTestClass
@@ -13,11 +13,12 @@ class ValidateTest extends CommonTestClass
      */
     public function testSimple()
     {
-        $validate = new MockValidate();
-        $this->assertEmpty($validate->getRules());
-        $validate->addRule(Interfaces\IRules::IS_FILLED, 'Not filled');
-        $validate->addRule(Interfaces\IRules::IS_STRING, 'Not string');
-        $this->assertTrue($validate->validate(MockEntry::init('foo', 'bar')));
+        $entry = MockEntry::init('foo', 'bar');
+        $this->assertEmpty($entry->getRules());
+        $entry->addRule(Interfaces\IRules::IS_FILLED, 'Not filled');
+        $entry->addRule(Interfaces\IRules::IS_STRING, 'Not string');
+        $validate = new Validate();
+        $this->assertTrue($validate->validate($entry));
         $this->assertEmpty($validate->getErrors());
     }
 
@@ -26,11 +27,12 @@ class ValidateTest extends CommonTestClass
      */
     public function testFailed()
     {
-        $validate = new MockValidate();
-        $this->assertEmpty($validate->getRules());
-        $validate->addRule(Interfaces\IRules::IS_FILLED, 'Not filled');
-        $validate->addRule(Interfaces\IRules::IS_STRING, 'Not string');
-        $this->assertFalse($validate->validate(MockEntry::init('baz', 0)));
+        $entry = MockEntry::init('baz', 0);
+        $this->assertEmpty($entry->getRules());
+        $entry->addRule(Interfaces\IRules::IS_FILLED, 'Not filled');
+        $entry->addRule(Interfaces\IRules::IS_STRING, 'Not string');
+        $validate = new Validate();
+        $this->assertFalse($validate->validate($entry));
         $this->assertNotEmpty($validate->getErrors());
     }
 
@@ -39,15 +41,14 @@ class ValidateTest extends CommonTestClass
      */
     public function testOr()
     {
-        $validate = new MockValidate();
-        $this->assertEmpty($validate->getRules());
-        $validate->addRule(Interfaces\IRules::IS_STRING, 'Not string');
-        $validate->addRule(Interfaces\IRules::IS_NUMERIC, 'Not number');
-        $presetRules = $validate->getRules();
-        $validate->removeRules();
-        $validate->addRule(Interfaces\IRules::IS_FILLED, 'Not filled');
-        $validate->addRule(Interfaces\IRules::MATCH_ANY, 'Must be following', $presetRules);
-        $this->assertTrue($validate->validate(MockEntry::init('vfr', 75)));
+        $entry = MockEntry::init('vfr', 75);
+        $subRules = new SubRules();
+        $subRules->addRule(Interfaces\IRules::IS_STRING, 'Not string');
+        $subRules->addRule(Interfaces\IRules::IS_NUMERIC, 'Not number');
+        $entry->addRule(Interfaces\IRules::IS_FILLED, 'Not filled');
+        $entry->addRule(Interfaces\IRules::MATCH_ANY, 'Must be following', $subRules->getRules());
+        $validate = new Validate();
+        $this->assertTrue($validate->validate($entry));
         $this->assertEmpty($validate->getErrors());
     }
 
@@ -56,19 +57,20 @@ class ValidateTest extends CommonTestClass
      */
     public function testOrFail()
     {
-        $validate = new MockValidate();
-        $this->assertEmpty($validate->getRules());
-        $validate->addRule(Interfaces\IRules::IS_STRING, 'Not string');
-        $validate->addRule(Interfaces\IRules::IS_BOOL, 'Not boolean');
-        $presetRules = $validate->getRules();
-        $validate->removeRules();
-        $validate->addRule(Interfaces\IRules::IS_FILLED, 'Not filled');
-        $validate->addRule(Interfaces\IRules::MATCH_ANY, 'Must be following', $presetRules);
-        $presetRules = $validate->getRules();
-        $validate->removeRules();
-        $this->assertEmpty($validate->getRules());
-        $validate->addRules($presetRules);
-        $this->assertFalse($validate->validate(MockEntry::init('vfr', 75)));
+        $entry = MockEntry::init('vfr', 75);
+        $this->assertEmpty($entry->getRules());
+        $entry->addRule(Interfaces\IRules::IS_STRING, 'Not string');
+        $entry->addRule(Interfaces\IRules::IS_BOOL, 'Not boolean');
+        $presetRules = $entry->getRules();
+        $entry->removeRules();
+        $entry->addRule(Interfaces\IRules::IS_FILLED, 'Not filled');
+        $entry->addRule(Interfaces\IRules::MATCH_ANY, 'Must be following', $presetRules);
+        $presetRules = $entry->getRules();
+        $entry->removeRules();
+        $this->assertEmpty($entry->getRules());
+        $entry->addRules($presetRules);
+        $validate = new Validate();
+        $this->assertFalse($validate->validate($entry));
         $this->assertNotEmpty($validate->getErrors());
     }
 
@@ -77,37 +79,16 @@ class ValidateTest extends CommonTestClass
      */
     public function testAddFile()
     {
-        $validate = new MockValidateFile();
-        $this->assertEmpty($validate->getRules());
-        $validate->addRule(Interfaces\IRules::FILE_RECEIVED, 'Must be received');
-        $validate->addRule(Interfaces\IRules::FILE_SENT, 'Must be sent');
-        $presetRules = $validate->getRules();
-        $validate->removeRules();
-        $this->assertEmpty($validate->getRules());
-        $validate->addRules($presetRules);
-        $this->assertFalse($validate->validate($this->getMockNoFile()));
+        $entry = $this->getMockNoFile();
+        $this->assertEmpty($entry->getRules());
+        $entry->addRule(Interfaces\IRules::FILE_RECEIVED, 'Must be received');
+        $entry->addRule(Interfaces\IRules::FILE_SENT, 'Must be sent');
+        $presetRules = $entry->getRules();
+        $entry->removeRules();
+        $this->assertEmpty($entry->getRules());
+        $entry->addRules($presetRules);
+        $validate = new Validate();
+        $this->assertFalse($validate->validate($entry));
         $this->assertNotEmpty($validate->getErrors());
-    }
-}
-
-
-class MockValidate
-{
-    use TValidate;
-
-    protected function whichFactory(): Interfaces\IRuleFactory
-    {
-        return new Rules\Factory();
-    }
-}
-
-
-class MockValidateFile
-{
-    use TValidate;
-
-    protected function whichFactory(): Interfaces\IRuleFactory
-    {
-        return new Rules\File\Factory();
     }
 }
