@@ -9,11 +9,17 @@ interface IRules
     const MATCH_ALL = 'matchall';
     /* Match any subrule, fail if every one fails */
     const MATCH_ANY = 'matchany';
+    /* Match by entry, fail if subrule or entry itself is not valid */
+    const MATCH_ENTRY = 'matchentry';
 
     /* Match when input equals expected value */
     const EQUALS = 'equals';
     /* Match when input not equals expected value */
     const NOT_EQUALS = 'nequals';
+    /* Match when input is in array of expected values */
+    const IN_ARRAY = 'inarr';
+    /* Match when input is not in array expected values */
+    const NOT_IN_ARRAY = 'ninarr';
     /* Check if input is greater than preset value */
     const IS_GREATER_THAN = 'greater';
     /* Check if input is lower than preset value */

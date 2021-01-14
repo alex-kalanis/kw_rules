@@ -30,9 +30,12 @@ trait TCheckArrayString
      */
     protected function checkRule($singleRule): string
     {
-        if (!is_string($singleRule)) {
-            throw new RuleException('Input for check is not a string.');
+        if (is_string($singleRule)) {
+            return $singleRule;
         }
-        return $singleRule;
+        if (is_numeric($singleRule)) {
+            return strval($singleRule);
+        }
+        throw new RuleException('Input for check is not a string.');
     }
 }

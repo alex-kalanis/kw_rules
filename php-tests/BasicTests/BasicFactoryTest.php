@@ -35,8 +35,11 @@ class BasicFactoryTest extends CommonTestClass
         return [
             [IRules::MATCH_ALL, true],
             [IRules::MATCH_ANY, true],
+            [IRules::MATCH_ENTRY, true],
             [IRules::EQUALS, true],
             [IRules::NOT_EQUALS, true],
+            [IRules::IN_ARRAY, true],
+            [IRules::NOT_IN_ARRAY, true],
             [IRules::IS_GREATER_THAN, true],
             [IRules::IS_LOWER_THAN, true],
             [IRules::IS_GREATER_THAN_EQUALS, true],

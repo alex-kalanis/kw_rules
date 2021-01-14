@@ -35,8 +35,11 @@ class FileFactoryTest extends CommonTestClass
         return [
             [IRules::MATCH_ALL, false],
             [IRules::MATCH_ANY, false],
+            [IRules::MATCH_ENTRY, false],
             [IRules::EQUALS, false],
             [IRules::NOT_EQUALS, false],
+            [IRules::IN_ARRAY, false],
+            [IRules::NOT_IN_ARRAY, false],
             [IRules::IS_GREATER_THAN, false],
             [IRules::IS_LOWER_THAN, false],
             [IRules::IS_GREATER_THAN_EQUALS, false],

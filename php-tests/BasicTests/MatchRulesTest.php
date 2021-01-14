@@ -95,8 +95,52 @@ class MatchRulesTest extends CommonTestClass
         return [
             [[$this->initPass(), $this->initPass()], true, true], // pass all
             [[$this->initPass(), $this->initDeny()], false, true], // pass partial
-            [[$this->initDeny(), $this->initDeny()], false, false], // pss nothing
+            [[$this->initDeny(), $this->initDeny()], false, false], // pass nothing
         ];
+    }
+
+    public function testMatchEntryFail1()
+    {
+        $data = new Rules\MatchByEntry();
+        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->expectException(RuleException::class);
+        $data->setAgainstValue('just string');
+    }
+
+    public function testMatchEntryFail2()
+    {
+        $data = new Rules\MatchByEntry();
+        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->expectException(RuleException::class);
+        $data->setAgainstValue(new \stdClass());
+    }
+
+    public function testMatchEntryPass()
+    {
+        $data = new Rules\MatchByEntry();
+        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+
+        $mock1 = MockEntry::init('foo', 'bar');
+        $mock1->addRule(IRules::IS_NOT_EMPTY, 'problems: none');
+        $data->setAgainstValue($mock1);
+        $mock2 = MockEntry::init('baz', 'bar');
+        $mock2->addRule(IRules::EQUALS, 'pass, because it is okay');
+        $data->validate($mock2);
+    }
+
+    public function testMatchEntrySub()
+    {
+        $data = new Rules\MatchByEntry();
+        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+
+        $mock1 = MockEntry::init('foo', 'bar');
+        $mock1->addRule(IRules::IS_NOT_EMPTY, 'problems: none');
+        $data->setAgainstValue($mock1);
+        $mock2 = MockEntry::init('baz', 'bar');
+        $mock2->addRule(IRules::EQUALS, 'pass, because it is okay');
+        $mock1->addRule(IRules::IS_NUMERIC, 'add something which make it fail');
+        $this->expectException(RuleException::class);
+        $data->validate($mock2);
     }
 
     protected function initPass()

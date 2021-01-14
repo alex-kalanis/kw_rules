@@ -45,6 +45,61 @@ class BasicRulesTest extends CommonTestClass
     }
 
     /**
+     * @param mixed $expectedValues
+     * @param string $checkValue
+     * @param bool $gotError
+     * @param bool $gotResult
+     * @throws RuleException
+     * @dataProvider arrayProvider
+     */
+    public function testInArray($expectedValues, string $checkValue, bool $gotError, bool $gotResult)
+    {
+        $data = new Rules\IsInArray();
+        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        if ($gotError) $this->expectException(RuleException::class);
+        $data->setAgainstValue($expectedValues);
+        if (!$gotError) {
+            $mock = MockEntry::init('foo', $checkValue);
+            if (!$gotResult) $this->expectException(RuleException::class);
+            $data->validate($mock);
+        }
+    }
+
+    /**
+     * @param mixed $expectedValues
+     * @param string $checkValue
+     * @param bool $gotError
+     * @param bool $gotResult
+     * @throws RuleException
+     * @dataProvider arrayProvider
+     */
+    public function testNotInArray($expectedValues, string $checkValue, bool $gotError, bool $gotResult)
+    {
+        $data = new Rules\IsNotInArray();
+        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        if ($gotError) $this->expectException(RuleException::class);
+        $data->setAgainstValue($expectedValues);
+        if (!$gotError) {
+            $mock = MockEntry::init('foo', $checkValue);
+            if ($gotResult) $this->expectException(RuleException::class);
+            $data->validate($mock);
+        }
+    }
+
+    public function arrayProvider()
+    {
+        return [
+            ['5', '7', true, false],
+            [[new \stdClass()], '7', true, false],
+            [[1,3,5,9], '7', false, false],
+            [[1,3,5,9], '5', false, true],
+            [['2','4','6','8'], 6, false, true],
+            [['abc','def','ghi','jkl'], 'mno', false, false],
+            [['abc','def','ghi','jkl'], 'def', false, true],
+        ];
+    }
+
+    /**
      * @param string $expectedValue
      * @param string $checkValue
      * @param bool $gotResult

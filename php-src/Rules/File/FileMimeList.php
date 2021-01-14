@@ -31,4 +31,12 @@ class FileMimeList extends AFileRule
         }
         throw new RuleException($this->errorText);
     }
+
+    protected function checkRule($singleRule): string
+    {
+        if (!is_string($singleRule)) {
+            throw new RuleException('Input for check is not a string.');
+        }
+        return $singleRule;
+    }
 }

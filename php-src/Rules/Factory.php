@@ -18,8 +18,11 @@ class Factory implements IRuleFactory
     protected static $map = [
         IRules::MATCH_ALL              => '\kalanis\kw_rules\Rules\MatchAll',
         IRules::MATCH_ANY              => '\kalanis\kw_rules\Rules\MatchAny',
+        IRules::MATCH_ENTRY            => '\kalanis\kw_rules\Rules\MatchByEntry',
         IRules::EQUALS                 => '\kalanis\kw_rules\Rules\Equals',
         IRules::NOT_EQUALS             => '\kalanis\kw_rules\Rules\NotEquals',
+        IRules::IN_ARRAY               => '\kalanis\kw_rules\Rules\IsInArray',
+        IRules::NOT_IN_ARRAY           => '\kalanis\kw_rules\Rules\IsNotInArray',
         IRules::IS_GREATER_THAN        => '\kalanis\kw_rules\Rules\GreaterThan',
         IRules::IS_LOWER_THAN          => '\kalanis\kw_rules\Rules\LesserThan',
         IRules::IS_GREATER_THAN_EQUALS => '\kalanis\kw_rules\Rules\GreaterEquals',
