@@ -52,7 +52,7 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider arrayProvider
      */
-    public function testInArray($expectedValues, string $checkValue, bool $gotError, bool $gotResult)
+    public function testInArray($expectedValues, $checkValue, bool $gotError, bool $gotResult)
     {
         $data = new Rules\IsInArray();
         $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
@@ -73,7 +73,7 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider arrayProvider
      */
-    public function testNotInArray($expectedValues, string $checkValue, bool $gotError, bool $gotResult)
+    public function testNotInArray($expectedValues, $checkValue, bool $gotError, bool $gotResult)
     {
         $data = new Rules\IsNotInArray();
         $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
