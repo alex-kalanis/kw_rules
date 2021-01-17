@@ -17,7 +17,7 @@ class IsActiveDomain extends ARule
 {
     public function validate(IValidate $entry): void
     {
-        if (filter_var(gethostbyname($entry->getValue()), FILTER_VALIDATE_IP)) {
+        if (filter_var(gethostbyname(strval($entry->getValue())), FILTER_VALIDATE_IP)) {
             return;
         }
         throw new RuleException($this->errorText);

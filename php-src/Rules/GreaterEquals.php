@@ -18,7 +18,7 @@ class GreaterEquals extends ARule
 
     public function validate(IValidate $entry): void
     {
-        if (intval($entry->getValue()) < $this->againstValue) {
+        if (floatval($entry->getValue()) < $this->againstValue) {
             throw new RuleException($this->errorText);
         }
     }

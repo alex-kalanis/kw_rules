@@ -24,20 +24,18 @@ trait TRules
      * @param string $ruleName
      * @param string $errorText
      * @param mixed ...$args
-     * @return $this
      * @throws RuleException
      */
-    public function addRule(string $ruleName, string $errorText, ...$args): self
+    public function addRule(string $ruleName, string $errorText, ...$args): void
     {
         $this->setFactory();
         $rule = $this->rulesFactory->getRule($ruleName);
         $rule->setErrorText($errorText);
         $rule->setAgainstValue(empty($args) ? null : reset($args));
         $this->rules[] = $rule;
-        return $this;
     }
 
-    public function addRules(iterable $rules = []): self
+    public function addRules(iterable $rules = []): void
     {
         foreach ($rules as $rule) {
             if ($rule instanceof Rules\ARule) {
@@ -47,7 +45,6 @@ trait TRules
                 $this->rules[] = $rule;
             }
         }
-        return $this;
     }
 
     public function getRules(): array
@@ -55,10 +52,9 @@ trait TRules
         return $this->rules;
     }
 
-    public function removeRules(): self
+    public function removeRules(): void
     {
         $this->rules = [];
-        return $this;
     }
 
     protected function setFactory(): void

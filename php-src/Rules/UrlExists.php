@@ -17,8 +17,8 @@ class UrlExists extends ARule
 {
     public function validate(IValidate $entry): void
     {
-        $headers = @get_headers($entry->getValue());
-        if (!empty($headers) && (false !== strpos($headers[0], '200') )) {
+        $headers = @get_headers(strval($entry->getValue()));
+        if (!empty($headers) && (false !== mb_strpos($headers[0], '200') )) {
             return;
         }
         throw new RuleException($this->errorText, $entry->getKey());

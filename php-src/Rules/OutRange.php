@@ -18,7 +18,7 @@ class OutRange extends ARule
 
     public function validate(IValidate $entry): void
     {
-        $varToCheck = intval($entry->getValue());
+        $varToCheck = floatval($entry->getValue());
         if ($varToCheck > $this->againstValue[0] && $varToCheck < $this->againstValue[1]) {
             throw new RuleException($this->errorText);
         }

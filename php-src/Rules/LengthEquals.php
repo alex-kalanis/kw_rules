@@ -18,7 +18,7 @@ class LengthEquals extends ARule
 
     public function validate(IValidate $entry): void
     {
-        if (mb_strlen($entry->getValue()) != $this->againstValue) {
+        if (mb_strlen(strval($entry->getValue())) != $this->againstValue) {
             throw new RuleException($this->errorText);
         }
     }
