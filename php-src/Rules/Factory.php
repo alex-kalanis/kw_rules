@@ -19,6 +19,7 @@ class Factory implements IRuleFactory
         IRules::MATCH_ALL              => '\kalanis\kw_rules\Rules\MatchAll',
         IRules::MATCH_ANY              => '\kalanis\kw_rules\Rules\MatchAny',
         IRules::MATCH_ENTRY            => '\kalanis\kw_rules\Rules\MatchByEntry',
+        IRules::ALWAYS                 => '\kalanis\kw_rules\Rules\Always',
         IRules::EQUALS                 => '\kalanis\kw_rules\Rules\Equals',
         IRules::NOT_EQUALS             => '\kalanis\kw_rules\Rules\NotEquals',
         IRules::IN_ARRAY               => '\kalanis\kw_rules\Rules\IsInArray',

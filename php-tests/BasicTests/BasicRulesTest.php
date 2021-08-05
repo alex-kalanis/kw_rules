@@ -191,6 +191,21 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareFillProvider
      */
+    public function testAlways($checkValue, bool $gotResult)
+    {
+        $data = new Rules\Always();
+        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $mock = MockEntry::init('foo', $checkValue);
+        $this->expectException(RuleException::class);
+        $data->validate($mock);
+    }
+
+    /**
+     * @param mixed $checkValue
+     * @param bool $gotResult
+     * @throws RuleException
+     * @dataProvider compareFillProvider
+     */
     public function testEmpty($checkValue, bool $gotResult)
     {
         $data = new Rules\IsEmpty();

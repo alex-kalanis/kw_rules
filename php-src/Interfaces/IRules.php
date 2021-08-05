@@ -12,6 +12,8 @@ interface IRules
     /* Match by entry, fail if subrule or entry itself is not valid */
     const MATCH_ENTRY = 'matchentry';
 
+    /* Match always - usually kill the rest of processing */
+    const ALWAYS = 'always';
     /* Match when input equals expected value */
     const EQUALS = 'equals';
     /* Match when input not equals expected value */
