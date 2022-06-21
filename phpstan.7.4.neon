@@ -4,8 +4,6 @@ parameters:
 		- 'php-src'
 	scanFiles:
 		- 'php-tests/CommonTestClass.php'
-	scanDirectories:
-		- 'php-tests/external'
 	excludePaths:
 		- 'php-tests/_autoload.php'
 		- 'php-tests/_bootstrap.php'

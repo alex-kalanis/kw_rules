@@ -4,6 +4,8 @@ parameters:
 		- 'php-src'
 	scanFiles:
 		- 'php-tests/CommonTestClass.php'
+	scanDirectories:
+		- 'php-tests/external'
 	excludePaths:
 		- 'php-tests/_autoload.php'
 		- 'php-tests/_bootstrap.php'
@@ -13,4 +15,4 @@ parameters:
 	checkGenericClassInNonGenericObjectType: false
 	ignoreErrors:
 		# inter-version...
-		- '#separator of function explode expects non-empty-string, string given.#'
+		- '#does not accept array<string, array<string, string>>\|false.#'
