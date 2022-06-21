@@ -16,8 +16,8 @@ class ProcessCallback extends ARule
 {
     /**
      * @param mixed $againstValue
-     * @return array
      * @throws RuleException
+     * @return callable
      */
     protected function checkValue($againstValue)
     {

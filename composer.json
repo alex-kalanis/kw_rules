@@ -22,6 +22,11 @@
     "giggsey/libphonenumber-for-php": "PHP package for checking phone numbers"
   },
   "require-dev": {
+    "giggsey/libphonenumber-for-php": "^8.12",
+    "giggsey/ddeboer/vatin": "^2.2",
+    "phpstan/phpstan": "^1.0",
+    "phpstan/phpstan-phpunit": "^1.0",
+    "friendsofphp/php-cs-fixer": "^3.0",
     "phpunit/phpunit": ">=7.2"
   },
   "autoload": {

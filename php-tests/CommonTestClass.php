@@ -97,7 +97,7 @@ class MockFile implements Interfaces\IValidateFile
         return $lib->setData($key, $value, $mime, $name, $size, $error);
     }
 
-    public function setData(string $key, string $value, string $mime, string $name, int $size, int $error): self
+    public function setData(string $key, $value, string $mime, string $name, int $size, int $error): self
     {
         $this->mockKey = $key;
         $this->mockValue = $value;
