@@ -28,7 +28,7 @@ trait TValidate
                     $this->errors[$entry->getKey()] = [];
                 }
                 $this->errors[$entry->getKey()][] = $ex;
-                while ($ex = $ex->getPrev()) {
+                while ($ex = $ex->/** @scrutinizer ignore-call */getPrev()) {
                     $this->errors[$entry->getKey()][] = $ex;
                 }
             }
