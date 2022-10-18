@@ -14,12 +14,12 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider equalsProvider
      */
-    public function testEquals(string $key, string $expectedValue, string $checkValue, bool $gotResult)
+    public function testEquals(string $key, string $expectedValue, string $checkValue, bool $gotResult): void
     {
         $data = new Rules\Equals();
         $data->setErrorText('Custom error');
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
 
         $mock = MockEntry::init($key, $checkValue);
         if (!$gotResult) $this->expectException(RuleException::class);
@@ -34,11 +34,11 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider equalsProvider
      */
-    public function testNotEquals(string $key, string $expectedValue, string $checkValue, bool $gotResult)
+    public function testNotEquals(string $key, string $expectedValue, string $checkValue, bool $gotResult): void
     {
         $data = new Rules\NotEquals();
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init($key, $checkValue);
         if ($gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -52,10 +52,10 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider arrayProvider
      */
-    public function testInArray($expectedValues, $checkValue, bool $gotError, bool $gotResult)
+    public function testInArray($expectedValues, $checkValue, bool $gotError, bool $gotResult): void
     {
         $data = new Rules\IsInArray();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         if ($gotError) $this->expectException(RuleException::class);
         $data->setAgainstValue($expectedValues);
         if (!$gotError) {
@@ -73,10 +73,10 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider arrayProvider
      */
-    public function testNotInArray($expectedValues, $checkValue, bool $gotError, bool $gotResult)
+    public function testNotInArray($expectedValues, $checkValue, bool $gotError, bool $gotResult): void
     {
         $data = new Rules\IsNotInArray();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         if ($gotError) $this->expectException(RuleException::class);
         $data->setAgainstValue($expectedValues);
         if (!$gotError) {
@@ -86,7 +86,7 @@ class BasicRulesTest extends CommonTestClass
         }
     }
 
-    public function arrayProvider()
+    public function arrayProvider(): array
     {
         return [
             ['5', '7', true, false],
@@ -106,11 +106,11 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareGtProvider
      */
-    public function testGreaterThan(string $expectedValue, string $checkValue, bool $gotResult)
+    public function testGreaterThan(string $expectedValue, string $checkValue, bool $gotResult): void
     {
         $data = new Rules\GreaterThan();
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if (!$gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -123,11 +123,11 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareLqProvider
      */
-    public function testGreaterEquals(string $expectedValue, string $checkValue, bool $gotResult)
+    public function testGreaterEquals(string $expectedValue, string $checkValue, bool $gotResult): void
     {
         $data = new Rules\GreaterEquals();
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if (!$gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -140,11 +140,11 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareLqProvider
      */
-    public function testLesserThan(string $expectedValue, string $checkValue, bool $gotResult)
+    public function testLesserThan(string $expectedValue, string $checkValue, bool $gotResult): void
     {
         $data = new Rules\LesserThan();
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if ($gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -157,17 +157,17 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareGtProvider
      */
-    public function testLesserEquals(string $expectedValue, string $checkValue, bool $gotResult)
+    public function testLesserEquals(string $expectedValue, string $checkValue, bool $gotResult): void
     {
         $data = new Rules\LesserEquals();
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if ($gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
     }
 
-    public function compareGtProvider()
+    public function compareGtProvider(): array
     {
         return [
             ['5', '7', true],
@@ -176,7 +176,7 @@ class BasicRulesTest extends CommonTestClass
         ];
     }
 
-    public function compareLqProvider()
+    public function compareLqProvider(): array
     {
         return [
             ['4', '8', true],
@@ -191,10 +191,10 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareFillProvider
      */
-    public function testAlways($checkValue, bool $gotResult)
+    public function testAlways($checkValue, bool $gotResult): void
     {
         $data = new Rules\Always();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -206,10 +206,10 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareFillProvider
      */
-    public function testEmpty($checkValue, bool $gotResult)
+    public function testEmpty($checkValue, bool $gotResult): void
     {
         $data = new Rules\IsEmpty();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if ($gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -221,16 +221,16 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareFillProvider
      */
-    public function testFilled($checkValue, bool $gotResult)
+    public function testFilled($checkValue, bool $gotResult): void
     {
         $data = new Rules\IsFilled();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if (!$gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
     }
 
-    public function compareFillProvider()
+    public function compareFillProvider(): array
     {
         return [
             [false, false],
@@ -247,16 +247,16 @@ class BasicRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareJsonProvider
      */
-    public function testJson($checkValue, bool $gotResult)
+    public function testJson($checkValue, bool $gotResult): void
     {
         $data = new Rules\IsJsonString();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if (!$gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
     }
 
-    public function compareJsonProvider()
+    public function compareJsonProvider(): array
     {
         return [
             [false, false],

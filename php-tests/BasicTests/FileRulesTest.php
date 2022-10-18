@@ -9,17 +9,17 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileExists()
+    public function testFileExists(): void
     {
         $data = new File\FileExists();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->validate($this->getMockFile());
     }
 
     /**
      * @throws RuleException
      */
-    public function testFileNotExists()
+    public function testFileNotExists(): void
     {
         $data = new File\FileExists();
         $this->expectException(RuleException::class);
@@ -29,17 +29,17 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileSent()
+    public function testFileSent(): void
     {
         $data = new File\FileSent();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->validate($this->getMockFile());
     }
 
     /**
      * @throws RuleException
      */
-    public function testFileNotSent()
+    public function testFileNotSent(): void
     {
         $data = new File\FileSent();
         $this->expectException(RuleException::class);
@@ -49,17 +49,17 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileReceived()
+    public function testFileReceived(): void
     {
         $data = new File\FileReceived();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->validate($this->getMockFile());
     }
 
     /**
      * @throws RuleException
      */
-    public function testFileNotReceived()
+    public function testFileNotReceived(): void
     {
         $data = new File\FileReceived();
         $this->expectException(RuleException::class);
@@ -73,10 +73,10 @@ class FileRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider sizeMatchProvider
      */
-    public function testFileMaxSize(string $maxSize, int $fileSize, bool $match)
+    public function testFileMaxSize(string $maxSize, int $fileSize, bool $match): void
     {
         $data = new File\FileMaxSize();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->setAgainstValue($maxSize);
         $mock = MockFile::init('foo', 'text0.txt', 'text/plain',
             '', $fileSize, UPLOAD_ERR_OK );
@@ -84,7 +84,7 @@ class FileRulesTest extends CommonTestClass
         $data->validate($mock);
     }
 
-    public function sizeMatchProvider()
+    public function sizeMatchProvider(): array
     {
         return [
             ['32',  128,   false],
@@ -98,10 +98,10 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileMimeEquals()
+    public function testFileMimeEquals(): void
     {
         $data = new File\FileMimeEquals();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->setAgainstValue('text/plain');
         $data->validate($this->getMockFile());
     }
@@ -109,7 +109,7 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileMimeNotEquals()
+    public function testFileMimeNotEquals(): void
     {
         $data = new File\FileMimeEquals();
         $data->setAgainstValue('octet/stream');
@@ -120,7 +120,7 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileMimeListFailString()
+    public function testFileMimeListFailString(): void
     {
         $data = new File\FileMimeList();
         $this->expectException(RuleException::class);
@@ -130,7 +130,7 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileMimeListFailNumber()
+    public function testFileMimeListFailNumber(): void
     {
         $data = new File\FileMimeList();
         $this->expectException(RuleException::class);
@@ -140,7 +140,7 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileMimeListFailClass()
+    public function testFileMimeListFailClass(): void
     {
         $data = new File\FileMimeList();
         $this->expectException(RuleException::class);
@@ -150,7 +150,7 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileMimeListFailArrayNumber()
+    public function testFileMimeListFailArrayNumber(): void
     {
         $data = new File\FileMimeList();
         $this->expectException(RuleException::class);
@@ -160,7 +160,7 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileMimeListFailArrayClass()
+    public function testFileMimeListFailArrayClass(): void
     {
         $data = new File\FileMimeList();
         $this->expectException(RuleException::class);
@@ -170,18 +170,18 @@ class FileRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFileMimeList()
+    public function testFileMimeList(): void
     {
         $data = new File\FileMimeList();
         $data->setAgainstValue(['text/plain']);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->validate($this->getMockFile());
     }
 
     /**
      * @throws RuleException
      */
-    public function testFileMimeNotList()
+    public function testFileMimeNotList(): void
     {
         $data = new File\FileMimeList();
         $data->setAgainstValue(['octet/stream']);

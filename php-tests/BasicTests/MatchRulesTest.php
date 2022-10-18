@@ -10,7 +10,7 @@ class MatchRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testNoMatchInitial()
+    public function testNoMatchInitial(): void
     {
         $data = new Rules\MatchAll();
         $this->expectException(RuleException::class);
@@ -20,7 +20,7 @@ class MatchRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testNoMatchStr()
+    public function testNoMatchStr(): void
     {
         $data = new Rules\MatchAll();
         $this->expectException(RuleException::class);
@@ -30,7 +30,7 @@ class MatchRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testNoMatchObj()
+    public function testNoMatchObj(): void
     {
         $data = new Rules\MatchAll();
         $this->expectException(RuleException::class);
@@ -40,7 +40,7 @@ class MatchRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testProcessErrors()
+    public function testProcessErrors(): void
     {
         $data = new Rules\MatchAll();
         $data->setAgainstValue([$this->initDeny(), $this->initDeny()]);
@@ -51,7 +51,7 @@ class MatchRulesTest extends CommonTestClass
             // no catch - no errors - be risky and that's okay here
             $got = $ex->getPrev();
             $this->assertNotEmpty($got);
-            $this->assertInstanceOf('\kalanis\kw_rules\Exceptions\RuleException', $got);
+            $this->assertInstanceOf(RuleException::class, $got);
         }
     }
 
@@ -62,11 +62,11 @@ class MatchRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider matchProvider
      */
-    public function testMatchAll(array $expectedValue, bool $matchAll, bool $matchAny)
+    public function testMatchAll(array $expectedValue, bool $matchAll, bool $matchAny): void
     {
         $data = new Rules\MatchAll();
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
 
         $mock = MockEntry::init('foo', 'bar');
         if (!$matchAll) $this->expectException(RuleException::class);
@@ -80,17 +80,17 @@ class MatchRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider matchProvider
      */
-    public function testMatchAny(array $expectedValue, bool $matchAll, bool $matchAny)
+    public function testMatchAny(array $expectedValue, bool $matchAll, bool $matchAny): void
     {
         $data = new Rules\MatchAny();
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', 'bar');
         if (!$matchAny) $this->expectException(RuleException::class);
         $data->validate($mock);
     }
 
-    public function matchProvider()
+    public function matchProvider(): array
     {
         return [
             [[$this->initPass(), $this->initPass()], true, true], // pass all
@@ -99,26 +99,26 @@ class MatchRulesTest extends CommonTestClass
         ];
     }
 
-    public function testMatchEntryFail1()
+    public function testMatchEntryFail1(): void
     {
         $data = new Rules\MatchByEntry();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $this->expectException(RuleException::class);
         $data->setAgainstValue('just string');
     }
 
-    public function testMatchEntryFail2()
+    public function testMatchEntryFail2(): void
     {
         $data = new Rules\MatchByEntry();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $this->expectException(RuleException::class);
         $data->setAgainstValue(new \stdClass());
     }
 
-    public function testMatchEntryPass()
+    public function testMatchEntryPass(): void
     {
         $data = new Rules\MatchByEntry();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
 
         $mock1 = MockEntry::init('foo', 'bar');
         $mock1->addRule(IRules::IS_NOT_EMPTY, 'problems: none');
@@ -128,10 +128,10 @@ class MatchRulesTest extends CommonTestClass
         $data->validate($mock2);
     }
 
-    public function testMatchEntrySub()
+    public function testMatchEntrySub(): void
     {
         $data = new Rules\MatchByEntry();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
 
         $mock1 = MockEntry::init('foo', 'bar');
         $mock1->addRule(IRules::IS_NOT_EMPTY, 'problems: none');
@@ -143,7 +143,7 @@ class MatchRulesTest extends CommonTestClass
         $data->validate($mock2);
     }
 
-    protected function initPass()
+    protected function initPass(): Rules\ProcessCallback
     {
         $callback = new Rules\ProcessCallback();
         $callback->setAgainstValue('MatchRulesTest::callMePass');
@@ -155,7 +155,7 @@ class MatchRulesTest extends CommonTestClass
         return true;
     }
 
-    protected function initDeny()
+    protected function initDeny(): Rules\ProcessCallback
     {
         $callback = new Rules\ProcessCallback();
         $callback->setAgainstValue('MatchRulesTest::callMeDeny');

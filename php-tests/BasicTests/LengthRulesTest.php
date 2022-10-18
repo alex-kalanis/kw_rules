@@ -15,10 +15,10 @@ class LengthRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareLenProvider
      */
-    public function testLengthMin(string $value, int $length, bool $passMin, bool $passEq, bool $passMax)
+    public function testLengthMin(string $value, int $length, bool $passMin, bool $passEq, bool $passMax): void
     {
         $data = new Rules\LengthMin();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $data->setAgainstValue($length);
         if (!$passMin) $this->expectException(RuleException::class);
         $data->validate(MockEntry::init('foo', $value));
@@ -33,10 +33,10 @@ class LengthRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareLenProvider
      */
-    public function testLengthEquals(string $value, int $length, bool $passMin, bool $passEq, bool $passMax)
+    public function testLengthEquals(string $value, int $length, bool $passMin, bool $passEq, bool $passMax): void
     {
         $data = new Rules\LengthEquals();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $data->setAgainstValue($length);
         if (!$passEq) $this->expectException(RuleException::class);
         $data->validate(MockEntry::init('foo', $value));
@@ -51,16 +51,16 @@ class LengthRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareLenProvider
      */
-    public function testLengthMax(string $value, int $length, bool $passMin, bool $passEq, bool $passMax)
+    public function testLengthMax(string $value, int $length, bool $passMin, bool $passEq, bool $passMax): void
     {
         $data = new Rules\LengthMax();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $data->setAgainstValue($length);
         if (!$passMax) $this->expectException(RuleException::class);
         $data->validate(MockEntry::init('foo', $value));
     }
 
-    public function compareLenProvider()
+    public function compareLenProvider(): array
     {
         return [
             ['yxcvbnm',   8, false, false, true ],

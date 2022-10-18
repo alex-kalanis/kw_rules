@@ -11,7 +11,7 @@ class ValidateTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testSimple()
+    public function testSimple(): void
     {
         $entry = MockEntry::init('foo', 'bar');
         $this->assertEmpty($entry->getRules());
@@ -25,7 +25,7 @@ class ValidateTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testFailed()
+    public function testFailed(): void
     {
         $entry = MockEntry::init('baz', 0);
         $this->assertEmpty($entry->getRules());
@@ -39,7 +39,7 @@ class ValidateTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testOr()
+    public function testOr(): void
     {
         $entry = MockEntry::init('vfr', 75);
         $subRules = new SubRules();
@@ -55,7 +55,7 @@ class ValidateTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testOrFail()
+    public function testOrFail(): void
     {
         $entry = MockEntry::init('vfr', 75);
         $this->assertEmpty($entry->getRules());
@@ -77,7 +77,7 @@ class ValidateTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testAddFile()
+    public function testAddFile(): void
     {
         $entry = $this->getMockNoFile();
         $this->assertEmpty($entry->getRules());

@@ -13,11 +13,11 @@ class PatternRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider stringsProvider
      */
-    public function testEmail(string $checkValue, bool $isEmail, bool $isDomain)
+    public function testEmail(string $checkValue, bool $isEmail, bool $isDomain): void
     {
         $data = new Rules\IsEmail();
         $data->setAgainstValue('');
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
 
         $mock = MockEntry::init('foo', $checkValue);
         if (!$isEmail) $this->expectException(RuleException::class);
@@ -31,18 +31,18 @@ class PatternRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider stringsProvider
      */
-    public function testDomain(string $checkValue, bool $isEmail, bool $isDomain)
+    public function testDomain(string $checkValue, bool $isEmail, bool $isDomain): void
     {
         $data = new Rules\IsDomain();
         $data->setAgainstValue('');
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
 
         $mock = MockEntry::init('foo', $checkValue);
         if (!$isDomain) $this->expectException(RuleException::class);
         $data->validate($mock);
     }
 
-    public function stringsProvider()
+    public function stringsProvider(): array
     {
         return [
             ['foo@bar.example',     true,  false],

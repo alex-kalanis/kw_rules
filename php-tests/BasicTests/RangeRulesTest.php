@@ -12,15 +12,15 @@ class RangeRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider inputRangeProvider
      */
-    public function testRangeSet($expectedValue, bool $gotException)
+    public function testRangeSet($expectedValue, bool $gotException): void
     {
         $data = new Rules\InRange();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         if ($gotException) $this->expectException(RuleException::class);
         $data->setAgainstValue($expectedValue);
     }
 
-    public function inputRangeProvider()
+    public function inputRangeProvider(): array
     {
         return [
             [['8', '4'], false],
@@ -41,11 +41,11 @@ class RangeRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareRangesProvider
      */
-    public function testRangeIn($checkValue, $lowerLimit, $upperLimit, bool $range, bool $rangeEq)
+    public function testRangeIn($checkValue, $lowerLimit, $upperLimit, bool $range, bool $rangeEq): void
     {
         $data = new Rules\InRange();
         $data->setAgainstValue([$lowerLimit, $upperLimit]);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if (!$range) $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -60,11 +60,11 @@ class RangeRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareRangesProvider
      */
-    public function testRangeInEquals($checkValue, $lowerLimit, $upperLimit, bool $range, bool $rangeEq)
+    public function testRangeInEquals($checkValue, $lowerLimit, $upperLimit, bool $range, bool $rangeEq): void
     {
         $data = new Rules\InRangeEquals();
         $data->setAgainstValue([$lowerLimit, $upperLimit]);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if (!$rangeEq) $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -79,11 +79,11 @@ class RangeRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareRangesProvider
      */
-    public function testRangeOut($checkValue, $lowerLimit, $upperLimit, bool $range, bool $rangeEq)
+    public function testRangeOut($checkValue, $lowerLimit, $upperLimit, bool $range, bool $rangeEq): void
     {
         $data = new Rules\OutRange();
         $data->setAgainstValue([$lowerLimit, $upperLimit]);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if ($range) $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -98,17 +98,17 @@ class RangeRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareRangesProvider
      */
-    public function testRangeOutEquals($checkValue, $lowerLimit, $upperLimit, bool $range, bool $rangeEq)
+    public function testRangeOutEquals($checkValue, $lowerLimit, $upperLimit, bool $range, bool $rangeEq): void
     {
         $data = new Rules\OutRangeEquals();
         $data->setAgainstValue([$lowerLimit, $upperLimit]);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init('foo', $checkValue);
         if ($rangeEq) $this->expectException(RuleException::class);
         $data->validate($mock);
     }
 
-    public function compareRangesProvider()
+    public function compareRangesProvider(): array
     {
         return [
             [2,  '8', '4',  false, false, ],

@@ -14,10 +14,10 @@ class CallbackRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider callbackProvider
      */
-    public function testCallback($expectedCall, $checkValue, bool $gotResult, bool $pass)
+    public function testCallback($expectedCall, $checkValue, bool $gotResult, bool $pass): void
     {
         $data = new Rules\ProcessCallback();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         if (!$gotResult) $this->expectException(RuleException::class);
         $data->setAgainstValue($expectedCall);
         if ($gotResult) {
@@ -27,7 +27,7 @@ class CallbackRulesTest extends CommonTestClass
         }
     }
 
-    public function callbackProvider()
+    public function callbackProvider(): array
     {
         return [
             [false, false, false, false],
@@ -41,12 +41,12 @@ class CallbackRulesTest extends CommonTestClass
         ];
     }
 
-    public static function callMeStatic($param)
+    public static function callMeStatic($param): bool
     {
         return !empty($param);
     }
 
-    public function callMeDynamic($param)
+    public function callMeDynamic($param): bool
     {
         return !empty($param);
     }

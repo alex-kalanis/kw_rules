@@ -14,11 +14,11 @@ class SafeRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider equalsProvider
      */
-    public function testEqualsSafeBasic(string $key, string $expectedValue, string $checkValue, bool $gotResult)
+    public function testEqualsSafeBasic(string $key, string $expectedValue, string $checkValue, bool $gotResult): void
     {
         $data = new Rules\Safe\HashedBasicEquals();
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init($key, $checkValue);
         if (!$gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
@@ -32,14 +32,13 @@ class SafeRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider equalsProvider
      */
-    public function testEqualsSafeFunc(string $key, string $expectedValue, string $checkValue, bool $gotResult)
+    public function testEqualsSafeFunc(string $key, string $expectedValue, string $checkValue, bool $gotResult): void
     {
         $data = new Rules\Safe\HashedFuncEquals();
         $data->setAgainstValue($expectedValue);
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $mock = MockEntry::init($key, $checkValue);
         if (!$gotResult) $this->expectException(RuleException::class);
         $data->validate($mock);
     }
-
 }

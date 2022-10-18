@@ -7,11 +7,14 @@ use kalanis\kw_rules\Rules;
 
 class BasicFactoryTest extends CommonTestClass
 {
-    public function testFactory()
+    /**
+     * @throws RuleException
+     */
+    public function testFactory(): void
     {
         $factory = new Rules\Factory();
         $data = $factory->getRule(IRules::SATISFIES_CALLBACK); // known to factory
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         $this->expectException(RuleException::class);
         $factory->getRule(IRules::IMAGE_MAX_DIMENSION); // not set in factory
     }
@@ -22,15 +25,15 @@ class BasicFactoryTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider inputsProvider
      */
-    public function testFactoryAvailability(string $rule, bool $gotResult)
+    public function testFactoryAvailability(string $rule, bool $gotResult): void
     {
         $factory = new Rules\Factory();
         if (!$gotResult) $this->expectException(RuleException::class);
         $data = $factory->getRule($rule);
-        if ($data) $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        if ($data) $this->assertInstanceOf(Rules\ARule::class, $data);
     }
 
-    public function inputsProvider()
+    public function inputsProvider(): array
     {
         return [
             [IRules::MATCH_ALL, true],

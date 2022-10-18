@@ -7,11 +7,11 @@ use kalanis\kw_rules\Rules;
 
 class FileFactoryTest extends CommonTestClass
 {
-    public function testFileFactory()
+    public function testFileFactory(): void
     {
         $factory = new Rules\File\Factory();
         $data = $factory->getRule(IRules::IMAGE_MAX_DIMENSION); // known to factory
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(Rules\File\AFileRule::class, $data);
         $this->expectException(RuleException::class);
         $factory->getRule(IRules::SATISFIES_CALLBACK); // not set in factory
     }
@@ -22,15 +22,15 @@ class FileFactoryTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider inputFilesProvider
      */
-    public function testFileFactoryAvailability(string $rule, bool $gotResult)
+    public function testFileFactoryAvailability(string $rule, bool $gotResult): void
     {
         $factory = new Rules\File\Factory();
         if (!$gotResult) $this->expectException(RuleException::class);
         $data = $factory->getRule($rule);
-        if ($data) $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        if ($data) $this->assertInstanceOf(Rules\File\AFileRule::class, $data);
     }
 
-    public function inputFilesProvider()
+    public function inputFilesProvider(): array
     {
         return [
             [IRules::MATCH_ALL, false],

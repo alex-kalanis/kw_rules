@@ -14,10 +14,10 @@ class FormatRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareFormatProvider
      */
-    public function testFormatBool($value, bool $resultBool, bool $resultNum, bool $resultStr)
+    public function testFormatBool($value, bool $resultBool, bool $resultNum, bool $resultStr): void
     {
         $data = new Rules\IsBool();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         if (!$resultBool) $this->expectException(RuleException::class);
         $data->validate(MockEntry::init('foo', $value));
     }
@@ -30,10 +30,10 @@ class FormatRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareFormatProvider
      */
-    public function testFormatNumeric($value, bool $resultBool, bool $resultNum, bool $resultStr)
+    public function testFormatNumeric($value, bool $resultBool, bool $resultNum, bool $resultStr): void
     {
         $data = new Rules\IsNumeric();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         if (!$resultNum) $this->expectException(RuleException::class);
         $data->validate(MockEntry::init('foo', $value));
     }
@@ -46,15 +46,15 @@ class FormatRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider compareFormatProvider
      */
-    public function testFormatString($value, bool $resultBool, bool $resultNum, bool $resultStr)
+    public function testFormatString($value, bool $resultBool, bool $resultNum, bool $resultStr): void
     {
         $data = new Rules\IsString();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\ARule', $data);
+        $this->assertInstanceOf(Rules\ARule::class, $data);
         if (!$resultStr) $this->expectException(RuleException::class);
         $data->validate(MockEntry::init('foo', $value));
     }
 
-    public function compareFormatProvider()
+    public function compareFormatProvider(): array
     {
         return [
             [false,           true,  false, false],

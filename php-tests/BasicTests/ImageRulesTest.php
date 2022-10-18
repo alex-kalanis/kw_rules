@@ -9,17 +9,17 @@ class ImageRulesTest extends CommonTestClass
     /**
      * @throws RuleException
      */
-    public function testImageExists()
+    public function testImageExists(): void
     {
         $data = new File\ImageIs();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->validate($this->getMockImage());
     }
 
     /**
      * @throws RuleException
      */
-    public function testImageNotExists()
+    public function testImageNotExists(): void
     {
         $data = new File\ImageIs();
         $this->expectException(RuleException::class);
@@ -33,16 +33,16 @@ class ImageRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider sizeMatchProvider
      */
-    public function testImageMatchSize(string $maxSizeX, string $maxSizeY, bool $matchEquals)
+    public function testImageMatchSize(string $maxSizeX, string $maxSizeY, bool $matchEquals): void
     {
         $data = new File\ImageSizeEquals();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->setAgainstValue([$maxSizeX, $maxSizeY]);
         if (!$matchEquals) $this->expectException(RuleException::class);
         $data->validate($this->getMockImage());
     }
 
-    public function testImageMatchSizeFail()
+    public function testImageMatchSizeFail(): void
     {
         $data = new File\ImageSizeEquals();
         $this->expectException(RuleException::class);
@@ -58,23 +58,23 @@ class ImageRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider sizeMatchProvider
      */
-    public function testImageMatchListSize(string $maxSizeX, string $maxSizeY, bool $matchEquals, bool $matchMin, bool $matchMax)
+    public function testImageMatchListSize(string $maxSizeX, string $maxSizeY, bool $matchEquals, bool $matchMin, bool $matchMax): void
     {
         $data = new File\ImageSizeList();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->setAgainstValue([[$maxSizeX, $maxSizeY]]);
         if (!$matchEquals) $this->expectException(RuleException::class);
         $data->validate($this->getMockImage());
     }
 
-    public function testImageMatchListSizeFailString()
+    public function testImageMatchListSizeFailString(): void
     {
         $data = new File\ImageSizeList();
         $this->expectException(RuleException::class);
         $data->setAgainstValue('abcdef');
     }
 
-    public function testImageMatchListSizeFailSimpleArray()
+    public function testImageMatchListSizeFailSimpleArray(): void
     {
         $data = new File\ImageSizeList();
         $this->expectException(RuleException::class);
@@ -90,19 +90,19 @@ class ImageRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider sizeMatchProvider
      */
-    public function testImageMatchMinSize(string $maxSizeX, string $maxSizeY, bool $matchEquals, bool $matchMin, bool $matchMax)
+    public function testImageMatchMinSize(string $maxSizeX, string $maxSizeY, bool $matchEquals, bool $matchMin, bool $matchMax): void
     {
         $data = new File\ImageSizeMin();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->setAgainstValue([$maxSizeX, $maxSizeY]);
         if (!$matchMin) $this->expectException(RuleException::class);
         $data->validate($this->getMockImage());
     }
 
-    public function testImageMatchMinSizeFail()
+    public function testImageMatchMinSizeFail(): void
     {
         $data = new File\ImageSizeMin();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $this->expectException(RuleException::class);
         $data->setAgainstValue('123456');
     }
@@ -116,24 +116,24 @@ class ImageRulesTest extends CommonTestClass
      * @throws RuleException
      * @dataProvider sizeMatchProvider
      */
-    public function testImageMatchMaxSize(string $maxSizeX, string $maxSizeY, bool $matchEquals, bool $matchMin, bool $matchMax)
+    public function testImageMatchMaxSize(string $maxSizeX, string $maxSizeY, bool $matchEquals, bool $matchMin, bool $matchMax): void
     {
         $data = new File\ImageSizeMax();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $data->setAgainstValue([$maxSizeX, $maxSizeY]);
         if (!$matchMax) $this->expectException(RuleException::class);
         $data->validate($this->getMockImage());
     }
 
-    public function testImageMatchMaxSizeFail()
+    public function testImageMatchMaxSizeFail(): void
     {
         $data = new File\ImageSizeMax();
-        $this->assertInstanceOf('\kalanis\kw_rules\Rules\File\AFileRule', $data);
+        $this->assertInstanceOf(File\AFileRule::class, $data);
         $this->expectException(RuleException::class);
         $data->setAgainstValue('123456');
     }
 
-    public function sizeMatchProvider()
+    public function sizeMatchProvider(): array
     {
         return [
             ['6', '5', true,  true,  true ],
