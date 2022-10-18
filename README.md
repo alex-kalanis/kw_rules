@@ -34,18 +34,3 @@ familiar with composer)
 
 2.) Connect the "kw_rules" classes into your app. When it came necessary
 you can extends every library to comply your use-case; mainly set checks itself.
-
-# Python Installation
-
-into your "setup.py":
-
-```
-    install_requires=[
-        'kw_rules',
-    ]
-```
-
-# Python Usage
-
-1.) Connect the "kw_rules.rules" into your app. When it came necessary
-you can extends every library to comply your use-case; mainly set checks itself.
