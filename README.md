@@ -1,7 +1,7 @@
 kw_rules
 ================
 
-[![Build Status](https://travis-ci.org/alex-kalanis/kw_rules.svg?branch=master)](https://travis-ci.org/alex-kalanis/kw_rules)
+[![Build Status](https://app.travis-ci.com/alex-kalanis/kw_rules.svg?branch=master)](https://app.travis-ci.com/github/alex-kalanis/kw_rules)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/alex-kalanis/kw_rules/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/alex-kalanis/kw_rules/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/alex-kalanis/kw_rules/v/stable.svg?v=1)](https://packagist.org/packages/alex-kalanis/kw_rules)
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg)](https://php.net/)
