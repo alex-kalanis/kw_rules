@@ -10,9 +10,8 @@ kw_rules
 [![Code Coverage](https://scrutinizer-ci.com/g/alex-kalanis/kw_rules/badges/coverage.png?b=master&v=1)](https://scrutinizer-ci.com/g/alex-kalanis/kw_rules/?branch=master)
 
 Contains simplification of rules from the whole bunch of setting. Allow you
-create a variety of checks across your app.
-
-This is the mixed package - contains sever-side implementation in Python and PHP.
+create a variety of checks across your app. This one is mainly used for checks
+in forms.
 
 # PHP Installation
 

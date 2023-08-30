@@ -92,4 +92,35 @@ class BasicFactoryTest extends CommonTestClass
             [IRules::SAFE_EQUALS_PASS, true],
         ];
     }
+
+    /**
+     * @throws RuleException
+     */
+    public function testShittySettingInstance(): void
+    {
+        $factory = new XFactory();
+        $this->expectException(RuleException::class);
+        $factory->getRule('not_instance');
+    }
+
+    /**
+     * @throws RuleException
+     */
+    public function testShittySettingClass(): void
+    {
+        $factory = new XFactory();
+        $this->expectException(RuleException::class);
+        $factory->getRule('not_class');
+    }
+}
+
+
+class XFactory extends Rules\Factory
+{
+    /** @var array<string, string> */
+    protected static $map = [
+        IRules::EQUALS => Rules\Equals::class,
+        'not_instance' => \stdClass::class,
+        'not_class'    => 'this_is_not_a_class',
+    ];
 }

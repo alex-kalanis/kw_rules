@@ -7,6 +7,9 @@ use kalanis\kw_rules\Rules;
 
 class FileFactoryTest extends CommonTestClass
 {
+    /**
+     * @throws RuleException
+     */
     public function testFileFactory(): void
     {
         $factory = new Rules\File\Factory();
@@ -88,4 +91,35 @@ class FileFactoryTest extends CommonTestClass
             [IRules::SAFE_EQUALS_PASS, false],
         ];
     }
+
+    /**
+     * @throws RuleException
+     */
+    public function testShittySettingInstance(): void
+    {
+        $factory = new XFileFactory();
+        $this->expectException(RuleException::class);
+        $factory->getRule('not_instance');
+    }
+
+    /**
+     * @throws RuleException
+     */
+    public function testShittySettingClass(): void
+    {
+        $factory = new XFileFactory();
+        $this->expectException(RuleException::class);
+        $factory->getRule('not_class');
+    }
+}
+
+
+class XFileFactory extends Rules\File\Factory
+{
+    /** @var array<string, string> */
+    protected static $map = [
+        IRules::FILE_EXISTS => Rules\File\FileExists::class,
+        'not_instance'      => \stdClass::class,
+        'not_class'      => 'this_is_not_a_class',
+    ];
 }
