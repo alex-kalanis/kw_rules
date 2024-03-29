@@ -117,7 +117,7 @@ class FileFactoryTest extends CommonTestClass
 class XFileFactory extends Rules\File\Factory
 {
     /** @var array<string, string> */
-    protected static $map = [
+    protected array $map = [
         IRules::FILE_EXISTS => Rules\File\FileExists::class,
         'not_instance'      => \stdClass::class,
         'not_class'      => 'this_is_not_a_class',

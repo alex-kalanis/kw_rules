@@ -45,7 +45,7 @@ class MockEntry implements Interfaces\IValidate
     protected $mockKey = '';
     protected $mockValue = '';
 
-    protected function whichFactory(): Interfaces\IRuleFactory
+    protected function whichRulesFactory(): Interfaces\IRuleFactory
     {
         return new Rules\Factory();
     }
@@ -86,7 +86,7 @@ class MockFile implements Interfaces\IValidateFile
     protected $mockSize = 0;
     protected $mockError = 0;
 
-    protected function whichFactory(): Interfaces\IRuleFactory
+    protected function whichRulesFactory(): Interfaces\IRuleFactory
     {
         return new Rules\File\Factory();
     }

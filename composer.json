@@ -15,13 +15,14 @@
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-hash": "*",
-    "php": ">=7.2.0"
+    "php": ">=7.4.0"
   },
   "suggest": {
     "ddeboer/vatin": "PHP package for checking EU VAT from",
     "giggsey/libphonenumber-for-php": "PHP package for checking phone numbers"
   },
   "require-dev": {
+    "shipmonk/composer-dependency-analyser": "^1.4",
     "giggsey/libphonenumber-for-php": "^8.12",
     "ddeboer/vatin": "^2.2",
     "phpstan/phpstan": "^1.0",
